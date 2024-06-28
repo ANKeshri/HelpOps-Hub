@@ -6,24 +6,36 @@ import OTP from '@pages/OTP';
 import Profile from '@pages/Profile';
 
 export const Login = ({ onClose, onSignupClick }) => {
+  //changing to add effect on eye button
   return (
-    <div className="login-auth-container">
+<div className="login-auth-container">
       <h1>Login to HelpOps-Hub</h1>
       <button className="google-btn">
       <img src="google.png" alt="Google" />
         Sign in with Google
       </button>
       <button className="github-btn">
-      <img src="github.png" alt="GitHub" />
+      <img src="github.png" alt="GitHub"  />
         Sign in with Github
       </button>
       <p>Or</p><br/>
       <input type="text" placeholder="Email or username" />
-      <input type="password" placeholder="Password" /><br/>
+      <div class="password-input-container">
+      <div class="password-wrapper">
+      <input type="password" id="passwordInput" placeholder="Password" />
+        <span class="toggle-password" onclick="togglePasswordVisibility()">
+            <img src="eye-close.jpg" alt="Toggle password visibility" id='eyeicon-login' />
+        </span>
+    </div>
+    </div>
+    <div>
+    {/* added forgot password */}
+    <a href="#" onClick={onSignupClick}>Forgot Password</a><br/>
       <a href="#" onClick={onSignupClick}>New here? Sign up now</a><br/>
       <button className="login-btn">Login</button>
       <button className="close-btn" onClick={onClose}>X</button>
     </div>
+</div>   
   );
 };
 
@@ -90,4 +102,37 @@ export const Signup = ({ onClose, onLoginClick }) => {
       <button className="close-btn" onClick={onClose}>X</button>
     </div>
   );
+};
+//making changes so that on clicking eye button password is visible
+let eyeIcon = document.getElementById("eyeicon-login");
+let password = document.getElementById("passwordInput");
+let eyeIconLogin = document.getElementById("eyeicon-login");
+let passwordLogin = document.getElementById("passwordInput");
+
+
+// Set the password field to type "password" by default
+password.type = "password";
+eyeIcon.src = "eye-close.jpg"; // Set the initial eye icon as closed
+
+eyeIcon.onclick = function () {
+  if (password.type === "password") {
+    password.type = "text";
+    eyeIcon.src = "eye-open.jpg";
+  } else {
+    password.type = "password";
+    eyeIcon.src = "eye-close.jpg";
+  }
+};
+
+passwordLogin.type = "password";
+eyeIconLogin.src = "eye-close.jpg"; // Set the initial eye icon as closed
+
+eyeIconLogin.onclick = function () {
+  if (passwordLogin.type === "password") {
+    passwordLogin.type = "text";
+    eyeIconLogin.src = "eye-open.jpg";
+  } else {
+    passwordLogin.type = "password";
+    eyeIconLogin.src = "eye-close.jpg";
+  }
 };
